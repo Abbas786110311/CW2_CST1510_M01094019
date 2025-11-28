@@ -1,4 +1,6 @@
 import bcrypt
+import sqlite3
+import pandas as pd
 
 password = 'Magic123'
 
@@ -38,3 +40,27 @@ def login_user():
             return validate_hash(user_pwd, hash_value)
 
     return False
+
+
+
+
+
+
+
+
+def migrating_datasets_metadata(conn):
+    data = pd.read_csv('DATA/datasets_metadata.csv')
+    data.to_sql('datasets_metadata', conn)
+
+def migrating_cyber_incidents(conn):
+    data = pd.read_csv('DATA/cyber_incidents.csv')
+    data.to_sql('cyber_incidents', conn)
+
+def migrating_it_tickets(conn):
+    data = pd.read_csv('DATA/it_tickets.csv')
+    data.to_sql('it_tickets', conn)
+
+
+conn = sqlite3.connect('DATA/intelligence_platform.db')
+migrating_it_tickets(conn)
+conn.close()
