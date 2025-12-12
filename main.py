@@ -33,7 +33,7 @@ def main():
 
 import sqlite3
 
-conn = sqlite3.connect('DATA/intelligence_platform.db')
+conn = sqlite3.connect('DATA/telligence_platform.db')
 curr = conn.cursor()
 
 sql = '''

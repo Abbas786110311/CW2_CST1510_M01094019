@@ -50,17 +50,19 @@ def login_user():
 
 def migrating_datasets_metadata(conn):
     data = pd.read_csv('DATA/datasets_metadata.csv')
-    data.to_sql('datasets_metadata', conn)
+    data.to_sql('datasets_metadata', conn, if_exists='replace', index=False)
 
 def migrating_cyber_incidents(conn):
     data = pd.read_csv('DATA/cyber_incidents.csv')
-    data.to_sql('cyber_incidents', conn)
+    data.to_sql('cyber_incidents', conn, if_exists='replace', index=False)
 
 def migrating_it_tickets(conn):
     data = pd.read_csv('DATA/it_tickets.csv')
-    data.to_sql('it_tickets', conn)
+    data.to_sql('it_tickets', conn, if_exists='replace', index=False)
 
 
-conn = sqlite3.connect('DATA/intelligence_platform.db')
-migrating_it_tickets(conn)
-conn.close()
+if __name__ == "__main__":
+    
+    conn = sqlite3.connect('DATA/intelligence_platform.db')
+    migrating_it_tickets(conn)
+    conn.close()

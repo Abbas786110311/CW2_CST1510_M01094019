@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 from app.datasets import get_all_datasets_metadata
-from app.db import conn
+from app.db import get_db_connection
+
+conn = get_db_connection()
 
 DATA_FILE = Path(__file__).parent / 'DATA' / 'datasets_metadata.csv'
 
@@ -11,7 +13,7 @@ if not DATA_FILE.exists():
     st.stop()
 
 data = get_all_datasets_metadata(conn)
-# data = pd.read_csv(DATA_FILE)
+
 
 st.set_page_config(
     page_title="Data Explorer App",
@@ -25,7 +27,7 @@ with st.sidebar:
     st.header("About")
     st.markdown(
         """
-        This app visualizes datasets metadata from the local CSV dataset.
+        
         """
     )
 
